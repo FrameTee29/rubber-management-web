@@ -4,9 +4,7 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
-  preset: [require("./rubber-preset.js")],
-  theme: {
-    extend: {},
-  },
+  presets: [require("./rubber-preset.js")],
+  theme: {},
   plugins: [],
 };

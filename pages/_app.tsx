@@ -13,8 +13,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Layout>
-        <Component {...pageProps} />;
+      <Layout pageProps={pageProps}>
+        <Component {...pageProps} />
       </Layout>
     </QueryClientProvider>
   );

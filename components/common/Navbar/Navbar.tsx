@@ -1,7 +1,7 @@
 import { FC } from "react";
 
-const Layout: FC = () => {
+const Navbar: FC = () => {
   return <div></div>;
 };
 
-export default Layout;
+export default Navbar;
