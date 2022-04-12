@@ -1,5 +1,6 @@
-import { CreateOrderForm } from "types/order.type";
 import httpClient from "./httpClient";
+
+import { CreateOrderForm } from "types/order.type";
 
 const createOrder = (body: CreateOrderForm) => {
   return httpClient().post("/orders", body);
