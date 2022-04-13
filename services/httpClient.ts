@@ -10,7 +10,6 @@ export default function httpClient(baseURL: string = url) {
 
   http.interceptors.request.use(async (config: any) => {
     const token = await localStorage.getItem(KeyLocalStorage.accessToken);
-    console.log(token);
 
     if (token) {
       config.headers["authorization"] = `Bearer ${token}`;

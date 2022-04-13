@@ -3,13 +3,13 @@ import { Modal, Pagination } from "antd";
 import { useForm } from "react-hook-form";
 import Title from "antd/lib/typography/Title";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useCallback, useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 
 import withAuth from "@libs/hoc/withAuth";
 import { RegisterCustomerForm, TCustomer } from "types/customer.type";
 import { Layout } from "@components/common/Layout";
 import { useCustomer } from "@libs/hooks/useCustomer";
-import { DarkGreenButton } from "@components/ui/Button";
+import { DarkGreenButton, WhiteButton } from "@components/ui/Button";
 
 enum StateCustomer {
   ADD_CUSTOMER = "Add customer",
@@ -36,10 +36,16 @@ export default function Customer() {
     resolver: yupResolver(addMemberSchema),
   });
 
-  const [meta, setMeta] = useState({ page: 1, limit: 10 });
+  const [meta, setMeta] = useState({
+    page: 1,
+    limit: 10,
+    key: "phone",
+    search: "",
+  });
 
   const { data: listCustomerData, refetch } = getCustomers(meta);
   const [customerId, setCustomerId] = useState<number>(0);
+  const [search, setSearch] = useState<string>("");
 
   const [listCustomer, setListCustomer] = useState<TCustomer[]>([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -99,8 +105,19 @@ export default function Customer() {
     } catch (err) {}
   };
 
+  const handleSetSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length === 0) {
+      setMeta({ ...meta, page: 1, search: "" });
+    }
+    setSearch(e.target.value);
+  };
+
   const handleChangePage = (page: number) => {
     setMeta({ ...meta, page });
+  };
+
+  const handleSearch = () => {
+    setMeta({ ...meta, page: 1, search: String(search) });
   };
 
   const AddCustomerForm = useCallback(() => {
@@ -194,6 +211,19 @@ export default function Customer() {
             onClick={handleShowModalAddCustomer}
           >
             Add customer
+          </DarkGreenButton>
+        </div>
+        <div className="mb-8">
+          <input
+            className="border px-2 py-2 rounded-md text-sm w-64 mr-3"
+            placeholder="Search with phone"
+            onChange={handleSetSearch}
+          ></input>
+          <DarkGreenButton
+            className="text-white"
+            onClick={() => handleSearch()}
+          >
+            Search
           </DarkGreenButton>
         </div>
         <div className="grid grid-cols-6 w-full rounded 2xl:max-w-7xl gap-4 text-white bg-dark-green-primary font-semibold px-1 py-2 border-2 border-dark-green-primary  text-base">
