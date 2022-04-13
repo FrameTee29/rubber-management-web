@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-const url = process.env.NEXT_PUBLIC_API_SERVICES_API_SERVICES || "";
+const url = process.env.NEXT_PUBLIC_API_SERVICES || "";
 
 const httpClient = (baseURL: string = url) => {
   return axios.create({

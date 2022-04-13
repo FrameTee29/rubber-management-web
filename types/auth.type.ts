@@ -4,6 +4,19 @@ export type RegisterForm = {
   firstName: string;
   lastName: string;
   phone: string;
+  confirmPassword?: string;
+};
+
+export type RegisterPersonalDetail = {
+  firstName: string;
+  lastName: string;
+  phone: string;
+};
+
+export type RegisterAccountDetail = {
+  email: string;
+  password: string;
+  confirmPassword: string;
 };
 
 export type LoginForm = {
