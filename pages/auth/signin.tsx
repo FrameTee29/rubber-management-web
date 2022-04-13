@@ -1,3 +1,4 @@
+import withAuth from "@libs/hoc/withAuth";
 import { AuthLayout } from "@components/common/Layout";
 import { SignInForm } from "@components/modules/auth";
 
@@ -9,4 +10,4 @@ export default function SignInPage() {
   );
 }
 
-SignInPage.Layout = AuthLayout;
+SignInPage.Layout = withAuth(AuthLayout);
