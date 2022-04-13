@@ -38,11 +38,8 @@ const withAuth = (WrappedComponent: any) => {
         router.push("/");
         return null;
       }
-      return (
-        <>
-          <WrappedComponent {...props} />
-        </>
-      );
+
+      return <WrappedComponent {...props} />;
     }
 
     return null;

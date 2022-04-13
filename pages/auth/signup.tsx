@@ -10,4 +10,4 @@ export default function SignUpPage() {
   );
 }
 
-SignUpPage.Layout = withAuth(AuthLayout);
+SignUpPage.Layout = AuthLayout;

@@ -10,4 +10,4 @@ export default function SignInPage() {
   );
 }
 
-SignInPage.Layout = withAuth(AuthLayout);
+SignInPage.Layout = AuthLayout;
