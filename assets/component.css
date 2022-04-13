@@ -1,0 +1,21 @@
+.ant-pagination-item-active a {
+    @apply text-white
+}
+
+.ant-pagination-item-active {
+    @apply border-dark-green-primary bg-dark-green-primary
+}
+
+.ant-pagination-item:hover{
+    @apply border-dark-green-primary
+}
+
+.ant-pagination-item:hover a{
+    @apply text-dark-green-primary
+}
+
+.ant-pagination-prev:hover .ant-pagination-item-link,
+.ant-pagination-next:hover .ant-pagination-item-link{
+    @apply text-dark-green-primary border-dark-green-primary !important
+
+}
