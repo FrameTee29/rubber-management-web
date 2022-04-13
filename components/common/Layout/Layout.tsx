@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Navbar } from "../Navbar";
+import { Sidebar } from "../Sidebar";
 
 interface IProps {
   pageProps: {};
@@ -7,8 +8,8 @@ interface IProps {
 
 const Layout: FC<IProps> = ({ children }) => {
   return (
-    <div>
-      <Navbar/>
+    <div className="flex w-full h-screen">
+      <Sidebar />
       <main>{children}</main>
     </div>
   );
