@@ -51,7 +51,7 @@
     "**/*.ts",
     "**/*.tsx",
     "scripts/**/*"
-  ],
+, "components/common/MenuSidebar.ts, "components/common/MenuSidebar.tss" ],
   "exclude": [
     "node_modules"
   ]

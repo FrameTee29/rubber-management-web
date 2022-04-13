@@ -1,4 +1,5 @@
 import "@assets/main.css";
+import "antd/dist/antd.css";
 
 import { FC } from "react";
 import type { AppProps } from "next/app";
