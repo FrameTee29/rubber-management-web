@@ -1,5 +1,5 @@
 export type TPagination<T> = {
-  item: T;
+  items: T;
   meta: TPaginationMeta;
 };
 

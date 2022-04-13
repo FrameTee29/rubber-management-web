@@ -26,6 +26,7 @@
     "react-hook-form": "^7.29.0",
     "react-query": "^3.34.16",
     "react-tooltip": "^4.2.21",
+    "sweetalert2": "^11.4.8",
     "yup": "^0.32.11",
     "zustand": "^3.7.1"
   },

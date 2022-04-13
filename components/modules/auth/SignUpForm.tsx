@@ -128,6 +128,7 @@ const SignUpForm: FC = () => {
           </div>
         </div>
         <DarkGreenButton
+          className="text-white"
           onClick={handleSubmitRegisterPersonal(() =>
             setStateSignUp(StateSignUp.ACCOUNT_DETAIL)
           )}
@@ -200,6 +201,7 @@ const SignUpForm: FC = () => {
             BACK
           </WhiteButton>
           <DarkGreenButton
+            className="text-white"
             type="submit"
             onClick={handleSubmitRegisterAccount(handleRegister)}
           >

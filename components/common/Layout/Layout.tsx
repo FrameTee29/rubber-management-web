@@ -10,7 +10,7 @@ const Layout: FC<IProps> = ({ children }) => {
   return (
     <div className="flex">
       <Sidebar />
-      <main className="flex w-full bg-white p-4">{children}</main>
+      <main className="w-full bg-white p-4 max-h-screen overflow-y-auto pb-10">{children}</main>
     </div>
   );
 };
