@@ -70,8 +70,12 @@ const SignUpForm: FC = () => {
         ...getValuesOfAccountDetail(),
         ...getValuesOfPersonalDetail(),
       } as RegisterForm;
-      await register(form);
-      router.push("/auth/signin");
+      try {
+        await register(form);
+        router.push("/auth/signin");
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
