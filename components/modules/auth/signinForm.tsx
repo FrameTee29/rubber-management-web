@@ -7,6 +7,7 @@ import { LoginForm } from "types/auth.type";
 import { DarkGreenButton } from "@components/ui/Button";
 import { useAuth } from "@libs/hooks/useAuth";
 import { useRouter } from "next/router";
+import { KeyLocalStorage } from "@constants/keyLocalStorage";
 
 const loginSchema = yup.object({
   username: yup.string().required("Please enter your email address"),
@@ -28,6 +29,7 @@ const SignInForm: FC = () => {
   const handleLogin = async (form: LoginForm) => {
     try {
       const { data } = await login(form);
+      localStorage.setItem(KeyLocalStorage.accessToken, data.accessToken);
       router.push("/");
     } catch (err) {
       console.log(err);
