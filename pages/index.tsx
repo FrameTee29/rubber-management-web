@@ -11,53 +11,30 @@ import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
+  PointElement,
+  LineElement,
   BarElement,
   Title,
   Tooltip,
   ArcElement,
   Legend,
 } from "chart.js";
-import { Pie, Bar } from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
 import { useChart } from "@libs/hooks/useChart";
-
+import { default as TitleAnd } from "antd/lib/typography/Title";
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
   BarElement,
+  PointElement,
+  LineElement,
   Title,
   Legend,
   ArcElement,
   Tooltip,
   Legend
 );
-
-export const data = {
-  labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-  datasets: [
-    {
-      label: "# of Votes",
-      data: [12, 19, 3, 5, 2, 3],
-      backgroundColor: [
-        "rgba(255, 99, 132, 0.2)",
-        "rgba(54, 162, 235, 0.2)",
-        "rgba(255, 206, 86, 0.2)",
-        "rgba(75, 192, 192, 0.2)",
-        "rgba(153, 102, 255, 0.2)",
-        "rgba(255, 159, 64, 0.2)",
-      ],
-      borderColor: [
-        "rgba(255, 99, 132, 1)",
-        "rgba(54, 162, 235, 1)",
-        "rgba(255, 206, 86, 1)",
-        "rgba(75, 192, 192, 1)",
-        "rgba(153, 102, 255, 1)",
-        "rgba(255, 159, 64, 1)",
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
 
 export const options = {
   responsive: true,
@@ -67,7 +44,26 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Chart",
+      text: "",
+    },
+  },
+};
+
+export const optionsHorizontalBar = {
+  indexAxis: "y" as const,
+  elements: {
+    bar: {
+      borderWidth: 2,
+    },
+  },
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "right" as const,
+    },
+    title: {
+      display: true,
+      text: "",
     },
   },
 };
@@ -77,6 +73,8 @@ export default function Index() {
   const { data: dataChart, isLoading, refetch } = getChart();
   const [pricePerUnit, setPricePerUnit] = useState<number[]>([]);
   const [priceTotal, setPriceTotal] = useState<number[]>([]);
+  const [employerTotal, setEmployerTotal] = useState<number[]>([]);
+  const [employeeTotal, setEmployeeTotal] = useState<number[]>([]);
   // console.log(pricePerUnit);
   console.log(priceTotal);
 
@@ -84,18 +82,17 @@ export default function Index() {
     refetch();
     const pricePerUnit = dataChart?.order.map((v) => v.pricePerUnit);
     const priceTotal = dataChart?.order.map((v) => v.priceTotal);
+    const employerTotal = dataChart?.order.map((v) => v.employer);
+    const employeeTotal = dataChart?.order.map((v) => v.employee);
     setPricePerUnit(pricePerUnit);
     setPriceTotal(priceTotal);
+    setEmployerTotal(employerTotal);
+    setEmployeeTotal(employeeTotal);
   }, [isLoading]);
 
   const dataBar = {
     labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"],
     datasets: [
-      {
-        label: "PricePerUnit",
-        data: pricePerUnit,
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
-      },
       {
         label: "PriceTotal",
         data: priceTotal,
@@ -104,9 +101,45 @@ export default function Index() {
     ],
   };
 
+  const dataLine = {
+    labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"],
+    datasets: [
+      {
+        label: "PricePerUnit",
+        data: pricePerUnit,
+        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+      {
+        label: "PriceTotal",
+        data: priceTotal,
+        borderColor: "rgb(53, 162, 235)",
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
+      },
+    ],
+  };
+
+  const dataHorizontalBar = {
+    labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"],
+    datasets: [
+      {
+        label: "Dataset 1",
+        data: employerTotal,
+        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+      {
+        label: "Dataset 2",
+        data: employeeTotal,
+        borderColor: "rgb(53, 162, 235)",
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
+      },
+    ],
+  };
+
   return (
     <div className="flex flex-col w-full">
-      {/* <Title level={4}>Dashboard</Title> */}
+      <TitleAnd level={2}>Dashboard</TitleAnd>
       <div className="flex flex-wrap justify-around gap-4 mt-14">
         {/* --- */}
         <div className="flex items-center justify-around w-60 h-28 bg-cream-primary">
@@ -169,13 +202,19 @@ export default function Index() {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-2 w-full place-content-center my-auto">
-        <div className="flex">
-          <Pie data={data} className="w-96" />
-        </div>
-        <div className="flex">
-          <Bar options={options} data={dataBar} />
-        </div>
+      <div className="max-w-7xl w-full mx-auto">
+        <TitleAnd level={2} className="my-10">
+          Graph
+        </TitleAnd>
+        <Line options={options} data={dataLine} />;
+        <TitleAnd level={2} className="mb-10 mt-16">
+          Graph
+        </TitleAnd>
+        <Bar options={options} data={dataBar} />
+        <TitleAnd level={2} className="mb-10 mt-16">
+          Graph
+        </TitleAnd>
+        <Bar options={optionsHorizontalBar} data={dataHorizontalBar} />
       </div>
     </div>
   );
