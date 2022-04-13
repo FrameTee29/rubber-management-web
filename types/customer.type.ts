@@ -8,6 +8,13 @@ export type RegisterCustomerForm = {
   address: string;
 };
 
+export type updateCustomerForm = {
+  id: number;
+  fullName: string;
+  phone: string;
+  address: string;
+};
+
 export type CustomerParam = TBaseQuery & {};
 
 //  Response

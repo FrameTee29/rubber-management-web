@@ -11,17 +11,25 @@ import { Layout } from "@components/common/Layout";
 import { useCustomer } from "@libs/hooks/useCustomer";
 import { DarkGreenButton } from "@components/ui/Button";
 
+enum StateCustomer {
+  ADD_CUSTOMER = "Add customer",
+  EDIT_CUSTOMER = "Edit customer",
+}
+
 const addMemberSchema = yup.object({
   fullName: yup.string().required("Please enter your full name"),
   phone: yup.string().required("Please enter your phone"),
   address: yup.string().required("Please enter your address"),
 });
 export default function Customer() {
-  const { getCustomers, registerCustomer } = useCustomer();
+  const { getCustomers, registerCustomer, updateCustomer } = useCustomer();
 
+  const [state, setState] = useState<StateCustomer>(StateCustomer.ADD_CUSTOMER);
   const {
     getValues,
+    setValue,
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterCustomerForm>({
@@ -31,6 +39,7 @@ export default function Customer() {
   const [meta, setMeta] = useState({ page: 1, limit: 10 });
 
   const { data: listCustomerData, refetch } = getCustomers(meta);
+  const [customerId, setCustomerId] = useState<number>(0);
 
   const [listCustomer, setListCustomer] = useState<TCustomer[]>([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -45,6 +54,21 @@ export default function Customer() {
 
   const handleCancel = () => {
     setIsModalVisible(false);
+  };
+
+  const handleShowModalAddCustomer = () => {
+    setState(StateCustomer.ADD_CUSTOMER);
+    reset();
+    showModal();
+  };
+
+  const handdleEditCustomer = (customer: TCustomer) => {
+    setState(StateCustomer.EDIT_CUSTOMER);
+    setValue("address", customer.address);
+    setValue("fullName", customer.fullName);
+    setValue("phone", customer.phone);
+    setCustomerId(customer.id);
+    showModal();
   };
 
   useEffect(() => {
@@ -62,7 +86,17 @@ export default function Customer() {
     try {
       await registerCustomer(form);
       refetch();
+      handleCancel();
     } catch (error) {}
+  };
+
+  const handleUpdateCustomer = async () => {
+    try {
+      const form = { ...getValues(), id: customerId };
+      await updateCustomer(form);
+      refetch();
+      handleCancel();
+    } catch (err) {}
   };
 
   const handleChangePage = (page: number) => {
@@ -118,12 +152,22 @@ export default function Customer() {
           </div>
         </div>
         <div>
-          <DarkGreenButton
-            onClick={handleSubmit(handleAddCustomer)}
-            className="w-full"
-          >
-            ADD CUSTOMER
-          </DarkGreenButton>
+          {state === StateCustomer.ADD_CUSTOMER && (
+            <DarkGreenButton
+              onClick={handleSubmit(handleAddCustomer)}
+              className="w-full text-white"
+            >
+              ADD CUSTOMER
+            </DarkGreenButton>
+          )}
+          {state === StateCustomer.EDIT_CUSTOMER && (
+            <DarkGreenButton
+              onClick={handleSubmit(handleUpdateCustomer)}
+              className="w-full text-white"
+            >
+              SAVE
+            </DarkGreenButton>
+          )}
         </div>
       </div>
     );
@@ -145,14 +189,19 @@ export default function Customer() {
           <p className="text-dark-green-primary">Customers</p>
         </Title>
         <div className="text-left mb-8">
-          <DarkGreenButton onClick={showModal}>Add customer</DarkGreenButton>
+          <DarkGreenButton
+            className="text-white"
+            onClick={handleShowModalAddCustomer}
+          >
+            Add customer
+          </DarkGreenButton>
         </div>
         <div className="grid grid-cols-6 w-full rounded 2xl:max-w-7xl gap-4 text-white bg-dark-green-primary font-semibold px-1 py-2 border-2 border-dark-green-primary  text-base">
           <div className="text-center">ID</div>
           <div>Full Name</div>
           <div>Phone</div>
-          <div className="col-span-2">Address</div>
-          <div className="text-center ">Action</div>
+          <div className="">Address</div>
+          <div className="text-center col-span-2">Action</div>
         </div>
         {listCustomer?.map((item) => {
           return (
@@ -163,8 +212,16 @@ export default function Customer() {
               <div className="text-center">{item.id}</div>
               <div>{item.fullName}</div>
               <div>{item.phone}</div>
-              <div className="truncate col-span-2">{item.address}</div>
-              <div className="text-center">
+              <div className="truncate ">{item.address}</div>
+              <div className="text-right">
+                <DarkGreenButton
+                  className="text-white"
+                  onClick={() => handdleEditCustomer(item)}
+                >
+                  Edit
+                </DarkGreenButton>
+              </div>
+              <div className="text-left">
                 <DarkGreenButton className="text-white">
                   Create Order
                 </DarkGreenButton>

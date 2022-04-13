@@ -72,7 +72,7 @@ const SignInForm: FC = () => {
           )}
         </div>
       </div>
-      <DarkGreenButton onClick={handleSubmit(handleLogin)}>
+      <DarkGreenButton onClick={handleSubmit(handleLogin)} className="text-white">
         LOGIN
       </DarkGreenButton>
     </div>
