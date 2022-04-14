@@ -3,7 +3,7 @@ import { useCustomer } from "@libs/hooks/useCustomer";
 import { Layout } from "@components/common/Layout";
 import Title from "antd/lib/typography/Title";
 import { useEffect, useState } from "react";
-import { UserGroupIcon } from "@heroicons/react/solid";
+import { ClockIcon, CollectionIcon, PresentationChartBarIcon, SaveAsIcon, UserGroupIcon } from "@heroicons/react/solid";
 import { DatePicker } from "antd";
 import moment from "moment";
 
@@ -22,10 +22,10 @@ export default function CustomerHistory(props) {
 
   const [meta, setMeta] = useState({
     phone: props.id,
-    start: undefined,
-    end: undefined,
-    year: undefined,
-    day: undefined,
+    start: undefined ,
+    end: undefined ,
+    year: undefined ,
+    day: undefined ,
   });
   const { data, refetch } = getCustomersSummary(meta);
   const [listOrder, setListOrder] = useState<{
@@ -73,14 +73,8 @@ export default function CustomerHistory(props) {
         <p className="text-dark-green-primary">Phone : {props.id}</p>
       </Title>
 
-      <div className="grid grid-cols-4">
-        <div className="flex flex-col gap-2">
-          {/* <DatePicker
-            defaultValue={moment("2015/01/01", dateFormat)}
-            format={dateFormat}
-            onChange={onChangePerSevenDay}
-            className="w-60"
-          /> */}
+      <div className="grid grid-cols-1 gap-4">
+        <div className="flex items-center gap-2">
           <div className="flex items-center justify-around w-60 h-28 bg-cream-primary">
             <div className="">
               <div className="uppercase text-xs">Price / 7 Day</div>
@@ -89,24 +83,15 @@ export default function CustomerHistory(props) {
               </div>
             </div>
             <div className="w-10">
-              <UserGroupIcon className="text-dark-green-secondary h-10 w-10  mx-auto" />
+              <ClockIcon className="text-dark-green-secondary h-10 w-10  mx-auto" />
             </div>
+          </div>
+          <div>
+              <p>*Summary customer create order today.</p>
           </div>
         </div>
         {/* ----- */}
-        <div className="flex flex-col gap-2">
-          <p>start</p>
-          <DatePicker
-            format={dateFormat}
-            onChange={onChangeStartPerMonth}
-            className="w-60"
-          />
-          <p>end</p>
-          <DatePicker
-            format={dateFormat}
-            onChange={onChangeEndPerMonth}
-            className="w-60"
-          />
+        <div className="flex items-center gap-2">
           <div className="flex items-center justify-around w-60 h-28 bg-cream-primary">
             <div className="">
               <div className="uppercase text-xs">Price / Month</div>
@@ -115,18 +100,25 @@ export default function CustomerHistory(props) {
               </div>
             </div>
             <div className="w-10">
-              <UserGroupIcon className="text-dark-green-secondary h-10 w-10  mx-auto" />
+              <CollectionIcon className="text-dark-green-secondary h-10 w-10  mx-auto" />
             </div>
           </div>
+          <DatePicker
+            placeholder="Select start date"
+            format={dateFormat}
+            onChange={onChangeStartPerMonth}
+            className="w-60 h-10"
+          />
+          <p>end</p>
+          <DatePicker
+            placeholder="Select end date"
+            format={dateFormat}
+            onChange={onChangeEndPerMonth}
+            className="w-60 h-10"
+          />
         </div>
         {/* ----- */}
-        <div className="flex flex-col gap-2">
-          <DatePicker
-            format={yearFormat}
-            onChange={onChangePerYear}
-            className="w-60"
-            picker="year"
-          />
+        <div className="flex items-center gap-2">
           <div className="flex items-center justify-around w-60 h-28 bg-cream-primary">
             <div className="">
               <div className="uppercase text-xs">Price /Year</div>
@@ -135,17 +127,18 @@ export default function CustomerHistory(props) {
               </div>
             </div>
             <div className="w-10">
-              <UserGroupIcon className="text-dark-green-secondary h-10 w-10  mx-auto" />
+              <PresentationChartBarIcon className="text-dark-green-secondary h-10 w-10  mx-auto" />
             </div>
           </div>
+          <DatePicker
+            format={yearFormat}
+            onChange={onChangePerYear}
+            className="w-60"
+            picker="year"
+          />
         </div>
         {/* ----- */}
-        <div className="flex flex-col gap-2">
-          <DatePicker
-            format={dateFormat}
-            onChange={onChangeCurrentDay}
-            className="w-60"
-          />
+        <div className="flex items-center gap-2">
           <div className="flex items-center justify-around w-60 h-28 bg-cream-primary">
             <div className="">
               <div className="uppercase text-xs">Price / Day</div>
@@ -154,9 +147,14 @@ export default function CustomerHistory(props) {
               </div>
             </div>
             <div className="w-10">
-              <UserGroupIcon className="text-dark-green-secondary h-10 w-10  mx-auto" />
+              <SaveAsIcon className="text-dark-green-secondary h-10 w-10  mx-auto" />
             </div>
           </div>
+          <DatePicker
+            format={dateFormat}
+            onChange={onChangeCurrentDay}
+            className="w-60"
+          />
         </div>
       </div>
     </>
