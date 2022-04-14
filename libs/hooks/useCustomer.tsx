@@ -19,6 +19,14 @@ export function useCustomer() {
     return transformResponse(response);
   };
 
+  const getCustomersSummary = (params: CustomerParam) => {
+    const response = useQuery(
+      "getCustomersSummary",
+      async () => await CustomerService.getCustomersSummary(params)
+    );
+    return transformResponse(response);
+  };
+
   // Mutation
   const { mutateAsync: registerCustomer } = useMutation(
     async (form: RegisterCustomerForm) =>
@@ -54,5 +62,5 @@ export function useCustomer() {
     }
   );
 
-  return { getCustomers, registerCustomer, updateCustomer };
+  return { getCustomers, registerCustomer, updateCustomer, getCustomersSummary };
 }

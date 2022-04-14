@@ -80,10 +80,10 @@ export default function Index() {
 
   useEffect(() => {
     refetch();
-    const pricePerUnit = dataChart?.order.map((v) => v.pricePerUnit);
-    const priceTotal = dataChart?.order.map((v) => v.priceTotal);
-    const employerTotal = dataChart?.order.map((v) => v.employer);
-    const employeeTotal = dataChart?.order.map((v) => v.employee);
+    const pricePerUnit = dataChart?.order.map((v: any) => v.pricePerUnit);
+    const priceTotal = dataChart?.order.map((v: any) => v.priceTotal);
+    const employerTotal = dataChart?.order.map((v: any) => v.employer);
+    const employeeTotal = dataChart?.order.map((v: any) => v.employee);
     setPricePerUnit(pricePerUnit);
     setPriceTotal(priceTotal);
     setEmployerTotal(employerTotal);

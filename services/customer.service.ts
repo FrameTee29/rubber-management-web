@@ -8,6 +8,7 @@ import {
 import { TPagination } from "types/pagination";
 import { KeyLocalStorage } from "@constants/keyLocalStorage";
 import httpClient from "./httpClient";
+import { TOrder } from "types/order.type";
 
 const registerCustomer = (
   body: RegisterCustomerForm
@@ -27,6 +28,17 @@ const getCustomers = (
   return httpClient().get("/customers", { params });
 };
 
-const CustomerService = { registerCustomer, getCustomers, updateCustomer };
+const getCustomersSummary = (
+  params: CustomerParam
+): Promise<TResponse<TPagination<TOrder[]>>> => {
+  return httpClient().get("/customers/summary", { params });
+};
+
+const CustomerService = {
+  registerCustomer,
+  getCustomers,
+  updateCustomer,
+  getCustomersSummary,
+};
 
 export default CustomerService;

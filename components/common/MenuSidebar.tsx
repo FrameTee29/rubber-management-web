@@ -1,5 +1,10 @@
 import { TMenuSidebar } from "types/menuSidebar";
-import { ChartPieIcon, InboxInIcon, UsersIcon } from "@heroicons/react/solid";
+import {
+  ChartPieIcon,
+  ClipboardListIcon,
+  InboxInIcon,
+  UsersIcon,
+} from "@heroicons/react/solid";
 
 export const MenuSidebar: TMenuSidebar[] = [
   {
@@ -16,5 +21,10 @@ export const MenuSidebar: TMenuSidebar[] = [
     title: "Create Order",
     icon: <InboxInIcon />,
     href: "/order",
+  },
+  {
+    title: "History",
+    icon: <ClipboardListIcon />,
+    href: "/history",
   },
 ];
