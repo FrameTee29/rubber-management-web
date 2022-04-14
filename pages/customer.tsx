@@ -248,17 +248,12 @@ export default function Customer() {
                 <div>{item.fullName}</div>
                 <div>{item.phone}</div>
                 <div className="truncate ">{item.address}</div>
-                <div className="text-right">
+                <div className="text-center col-span-2">
                   <DarkGreenButton
                     className="text-white"
                     onClick={() => handdleEditCustomer(item)}
                   >
                     Edit
-                  </DarkGreenButton>
-                </div>
-                <div className="text-left">
-                  <DarkGreenButton className="text-white">
-                    Create Order
                   </DarkGreenButton>
                 </div>
               </div>
