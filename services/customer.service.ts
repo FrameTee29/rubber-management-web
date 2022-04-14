@@ -1,3 +1,4 @@
+import httpClient from "./httpClient";
 import { TResponse } from "types/response";
 import {
   TCustomer,
@@ -5,10 +6,8 @@ import {
   CustomerParam,
   updateCustomerForm,
 } from "types/customer.type";
-import { TPagination } from "types/pagination";
-import { KeyLocalStorage } from "@constants/keyLocalStorage";
-import httpClient from "./httpClient";
 import { TOrder } from "types/order.type";
+import { TPagination } from "types/pagination";
 
 const registerCustomer = (
   body: RegisterCustomerForm

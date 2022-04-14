@@ -74,66 +74,66 @@ export default function History() {
           );
         })}
       </Modal>
-      <div className="w-full">
-        <Title level={2}>
-          <p className="text-dark-green-primary">History</p>
-        </Title>
-        <div className="mx-auto grid grid-cols-9 w-full rounded 2xl:max-w-7xl gap-4 text-white bg-dark-green-primary font-semibold px-1 py-2 border-2 border-dark-green-primary  text-base">
-          <div className="text-center">No</div>
-          <div>CreatedAt</div>
-          <div>Customer name</div>
-          <div>Total Weight</div>
-          <div>Total price</div>
-          <div>Price/Unit</div>
-          <div>Employer</div>
-          <div>Employee</div>
-          <div>Action</div>
-        </div>
-        {listOrder?.map((item) => {
-          return (
-            <>
-              <div
-                key={item.id}
-                className="mx-auto grid grid-cols-9 items-center rounded gap-4 border-2 w-full 2xl:max-w-7xl border-dark-green-primary bg-cream-secondary my-2 font-medium py-1"
-              >
-                <div className="text-center">{item.orderNumber}</div>
-                <div>{item.createdAt}</div>
-                <div>{item.customer.fullName}</div>
-                <div>{item.weightTotal}</div>
-                <div>{item.priceTotal}</div>
-                <div>{item.pricePerUnit}</div>
-                <div>{item.employer}</div>
-                <div>{item.employee}</div>
-                <div className="grid grid-cols-2 gap-1 mx-1">
-                  <button
-                    onClick={() => handleOrder(item)}
-                    className="text-white bg-dark-green-secondary p-2 rounded-md"
-                  >
-                    View
-                  </button>
-                  <Link href={`/history/${item.customer.phone}`}>
-                    <a>
-                      <button
-                        className="text-white bg-dark-green-secondary p-2 rounded-md"
-                      >
-                        More
-                      </button>
-                    </a>
-                  </Link>
+      <div className="container mx-auto">
+        <div className="w-full">
+          <Title level={2}>
+            <p className="text-dark-green-primary">History</p>
+          </Title>
+          <div className="mx-auto grid grid-cols-9 w-full rounded gap-4 text-white bg-dark-green-primary font-semibold px-1 py-2 border-2 border-dark-green-primary  text-base">
+            <div className="text-center">No</div>
+            <div>CreatedAt</div>
+            <div>Customer name</div>
+            <div>Total Weight</div>
+            <div>Total price</div>
+            <div>Price/Unit</div>
+            <div>Employer</div>
+            <div>Employee</div>
+            <div>Action</div>
+          </div>
+          {listOrder?.map((item) => {
+            return (
+              <>
+                <div
+                  key={item.id}
+                  className="mx-auto grid grid-cols-9 items-center rounded gap-4 border-2 w-full  border-dark-green-primary bg-cream-secondary my-2 font-medium py-1"
+                >
+                  <div className="text-center">{item.orderNumber}</div>
+                  <div>{item.createdAt}</div>
+                  <div>{item.customer.fullName}</div>
+                  <div>{item.weightTotal}</div>
+                  <div>{item.priceTotal}</div>
+                  <div>{item.pricePerUnit}</div>
+                  <div>{item.employer}</div>
+                  <div>{item.employee}</div>
+                  <div className="grid grid-cols-2 gap-1 mx-1">
+                    <button
+                      onClick={() => handleOrder(item)}
+                      className="text-white bg-dark-green-secondary p-2 rounded-md"
+                    >
+                      View
+                    </button>
+                    <Link href={`/history/${item.customer.phone}`}>
+                      <a>
+                        <button className="text-white bg-dark-green-secondary p-2 rounded-md">
+                          More
+                        </button>
+                      </a>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            </>
-          );
-        })}
-        <div className="text-left mt-5 flex justify-center">
-          <Pagination
-            defaultCurrent={1}
-            defaultPageSize={10}
-            current={listOrderData?.meta?.currentPage || 1}
-            pageSize={listOrderData?.meta?.itemsPerPage || 10}
-            total={listOrderData?.meta?.totalItems || 10}
-            onChange={handleChangePage}
-          />
+              </>
+            );
+          })}
+          <div className="text-right mt-5">
+            <Pagination
+              defaultCurrent={1}
+              defaultPageSize={10}
+              current={listOrderData?.meta?.currentPage || 1}
+              pageSize={listOrderData?.meta?.itemsPerPage || 10}
+              total={listOrderData?.meta?.totalItems || 10}
+              onChange={handleChangePage}
+            />
+          </div>
         </div>
       </div>
     </>

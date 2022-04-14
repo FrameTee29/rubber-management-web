@@ -193,7 +193,11 @@ export default function Customer() {
   return (
     <>
       <Modal
-        title="Add customer"
+        title={
+          state === StateCustomer.ADD_CUSTOMER
+            ? "Add customer"
+            : "Edit customer"
+        }
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -201,73 +205,75 @@ export default function Customer() {
       >
         <AddCustomerForm />
       </Modal>
-      <div className="w-full">
-        <Title level={2}>
-          <p className="text-dark-green-primary">Customers</p>
-        </Title>
-        <div className="text-left mb-8">
-          <DarkGreenButton
-            className="text-white"
-            onClick={handleShowModalAddCustomer}
-          >
-            Add customer
-          </DarkGreenButton>
-        </div>
-        <div className="mb-8">
-          <input
-            className="border px-2 py-2 rounded-md text-sm w-64 mr-3"
-            placeholder="Search with phone"
-            onChange={handleSetSearch}
-          ></input>
-          <DarkGreenButton
-            className="text-white"
-            onClick={() => handleSearch()}
-          >
-            Search
-          </DarkGreenButton>
-        </div>
-        <div className="grid grid-cols-6 w-full rounded 2xl:max-w-7xl gap-4 text-white bg-dark-green-primary font-semibold px-1 py-2 border-2 border-dark-green-primary  text-base">
-          <div className="text-center">ID</div>
-          <div>Full Name</div>
-          <div>Phone</div>
-          <div className="">Address</div>
-          <div className="text-center col-span-2">Action</div>
-        </div>
-        {listCustomer?.map((item) => {
-          return (
-            <div
-              key={item.id}
-              className="grid grid-cols-6 items-center rounded gap-4 border-2 w-full 2xl:max-w-7xl border-dark-green-primary bg-cream-secondary my-2 font-medium py-1"
+      <div className="container mx-auto">
+        <div className="w-full">
+          <Title level={2}>
+            <p className="text-dark-green-primary">Customers</p>
+          </Title>
+          <div className="text-left mb-8">
+            <DarkGreenButton
+              className="text-white"
+              onClick={handleShowModalAddCustomer}
             >
-              <div className="text-center">{item.id}</div>
-              <div>{item.fullName}</div>
-              <div>{item.phone}</div>
-              <div className="truncate ">{item.address}</div>
-              <div className="text-right">
-                <DarkGreenButton
-                  className="text-white"
-                  onClick={() => handdleEditCustomer(item)}
-                >
-                  Edit
-                </DarkGreenButton>
+              Add customer
+            </DarkGreenButton>
+          </div>
+          <div className="mb-8">
+            <input
+              className=" px-2 py-2 rounded-md text-sm w-64 mr-3 border-dark-green-primary border-2"
+              placeholder="Search with phone"
+              onChange={handleSetSearch}
+            ></input>
+            <DarkGreenButton
+              className="text-white"
+              onClick={() => handleSearch()}
+            >
+              Search
+            </DarkGreenButton>
+          </div>
+          <div className="grid grid-cols-6 w-full rounded  gap-4 text-white bg-dark-green-primary font-semibold px-1 py-2 border-2 border-dark-green-primary  text-base">
+            <div className="text-center">ID</div>
+            <div>Full Name</div>
+            <div>Phone</div>
+            <div className="">Address</div>
+            <div className="text-center col-span-2">Action</div>
+          </div>
+          {listCustomer?.map((item) => {
+            return (
+              <div
+                key={item.id}
+                className="grid grid-cols-6 items-center rounded gap-4 border-2 w-full  border-dark-green-primary bg-cream-secondary my-2 font-medium py-1"
+              >
+                <div className="text-center">{item.id}</div>
+                <div>{item.fullName}</div>
+                <div>{item.phone}</div>
+                <div className="truncate ">{item.address}</div>
+                <div className="text-right">
+                  <DarkGreenButton
+                    className="text-white"
+                    onClick={() => handdleEditCustomer(item)}
+                  >
+                    Edit
+                  </DarkGreenButton>
+                </div>
+                <div className="text-left">
+                  <DarkGreenButton className="text-white">
+                    Create Order
+                  </DarkGreenButton>
+                </div>
               </div>
-              <div className="text-left">
-                <DarkGreenButton className="text-white">
-                  Create Order
-                </DarkGreenButton>
-              </div>
-            </div>
-          );
-        })}
-        <div className="text-right mt-5">
-          <Pagination
-            defaultCurrent={1}
-            defaultPageSize={10}
-            current={listCustomerData?.meta?.currentPage || 1}
-            pageSize={listCustomerData?.meta?.itemsPerPage || 10}
-            total={listCustomerData?.meta?.totalItems || 10}
-            onChange={handleChangePage}
-          />
+            );
+          })}
+          <div className="text-right mt-5">
+            <Pagination
+              defaultCurrent={1}
+              defaultPageSize={10}
+              current={listCustomerData?.meta?.currentPage || 1}
+              pageSize={listCustomerData?.meta?.itemsPerPage || 10}
+              total={listCustomerData?.meta?.totalItems || 10}
+              onChange={handleChangePage}
+            />
+          </div>
         </div>
       </div>
     </>

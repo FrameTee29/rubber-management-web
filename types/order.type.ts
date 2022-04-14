@@ -5,7 +5,7 @@ import { TCustomer } from "./customer.type";
 // Form , body , param
 export type CreateOrderForm = {
   pricePerUnit: number;
-  customerName: string;
+  phone: string;
   orderItems: number[];
   employer?: number;
   employee?: number;
