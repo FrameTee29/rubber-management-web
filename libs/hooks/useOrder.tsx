@@ -4,6 +4,7 @@ import OrderService from "@services/order.service";
 
 import { CreateOrderForm, OrderParam } from "types/order.type";
 import { transformResponse } from "./transformResponse";
+import Swal from "sweetalert2";
 
 export function useOrder() {
   // Query
@@ -16,7 +17,15 @@ export function useOrder() {
   };
   // Mutation
   const { mutateAsync: createOrder } = useMutation(
-    async (form: CreateOrderForm) => await OrderService.createOrder(form)
+    async (form: CreateOrderForm) => await OrderService.createOrder(form),
+    {
+      onSuccess: () => {
+        Swal.fire({ icon: "success", text: "Create order successfully" });
+      },
+      onError: (result: any) => {
+        Swal.fire({ icon: "error", text: result?.response?.data?.message });
+      },
+    }
   );
 
   return { getOrder, createOrder };

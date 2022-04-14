@@ -15,3 +15,14 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.truncate-3line{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: initial;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+

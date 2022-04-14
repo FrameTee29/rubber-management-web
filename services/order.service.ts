@@ -5,7 +5,7 @@ import { TResponse } from "types/response";
 import { TPagination } from "types/pagination";
 
 const createOrder = (body: CreateOrderForm) => {
-  return httpClient().post("/orders", body);
+  return httpClient().post("/orders/create", body);
 };
 
 const getOrders = (

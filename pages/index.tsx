@@ -138,15 +138,20 @@ export default function Index() {
   };
 
   return (
-    <div className="flex flex-col w-full">
-      <TitleAnd level={2}>Dashboard</TitleAnd>
-      <div className="flex flex-wrap justify-around gap-4 mt-14">
+    <div className="container mx-auto">
+      <TitleAnd level={2}>
+        <p className="text-dark-green-primary">Dashboard</p>
+      </TitleAnd>
+      <div className="flex flex-wrap justify-around gap-4 mt-8">
         {/* --- */}
-        <div className="flex items-center justify-around w-60 h-28 bg-cream-primary">
+        <div className="flex items-center justify-around w-60 h-28 bg-cream-secondary border-4 border-dark-green-primary rounded-md">
           <div className="">
             <div className="uppercase text-xs">Total user</div>
-            <div className="text-xl text-gray-700">
-              {dataChart?.totalCustomer} people
+            <div className="text-gray-700">
+              <span className="text-xl font-semibold ">
+                {dataChart?.totalCustomer}
+              </span>{" "}
+              <span className="text-base">people</span>
             </div>
           </div>
           <div className="w-10">
@@ -154,11 +159,14 @@ export default function Index() {
           </div>
         </div>
         {/* --- */}
-        <div className="flex items-center justify-around w-60 h-28 bg-cream-primary">
+        <div className="flex items-center justify-around w-60 h-28 bg-cream-secondary border-4 border-dark-green-primary rounded-md">
           <div className="">
             <div className="uppercase text-xs">Total expenses</div>
-            <div className="text-xl text-gray-700">
-              {dataChart?.priceTotal} ฿
+            <div className="text-gray-700">
+              <span className="text-xl font-semibold ">
+                {dataChart?.priceTotal}
+              </span>{" "}
+              <span className="text-lg">฿</span>
             </div>
           </div>
           <div className="w-10">
@@ -166,11 +174,14 @@ export default function Index() {
           </div>
         </div>
         {/* --- */}
-        <div className="flex items-center justify-around w-60 h-28 bg-cream-primary">
+        <div className="flex items-center justify-around w-60 h-28 bg-cream-secondary border-4 border-dark-green-primary rounded-md">
           <div className="">
             <div className="uppercase text-xs">Total weight</div>
-            <div className="text-xl text-gray-700">
-              {dataChart?.weightTotal} kg
+            <div className="text-gray-700">
+              <span className="text-xl font-semibold ">
+                {dataChart?.weightTotal}
+              </span>{" "}
+              <span className="text-base">kg</span>
             </div>
           </div>
           <div className="w-10">
@@ -178,11 +189,14 @@ export default function Index() {
           </div>
         </div>
         {/* --- */}
-        <div className="flex items-center justify-around w-60 h-28 bg-cream-primary">
+        <div className="flex items-center justify-around w-60 h-28 bg-cream-secondary border-4 border-dark-green-primary rounded-md">
           <div className="">
             <div className="uppercase text-xs">Total Order</div>
-            <div className="text-xl text-gray-700">
-              {dataChart?.totalOrder} unit
+            <div className="text-gray-700">
+              <span className="text-xl font-semibold ">
+                {dataChart?.totalOrder}
+              </span>{" "}
+              <span className=" text-base">unit</span>
             </div>
           </div>
           <div className="w-10">
@@ -190,11 +204,14 @@ export default function Index() {
           </div>
         </div>
         {/* --- */}
-        <div className="flex items-center justify-around w-60 h-28 bg-cream-primary">
+        <div className="flex items-center justify-around w-60 h-28 bg-cream-secondary border-4 border-dark-green-primary rounded-md">
           <div className="">
             <div className="uppercase text-xs">Today Order</div>
-            <div className="text-xl text-gray-700">
-              {dataChart?.currentOrder} unit
+            <div className="text-gray-700">
+              <span className="text-xl font-semibold ">
+                {dataChart?.currentOrder}
+              </span>{" "}
+              <span className=" text-base">unit</span>
             </div>
           </div>
           <div className="w-10">
@@ -206,7 +223,7 @@ export default function Index() {
         <TitleAnd level={2} className="my-10">
           Graph
         </TitleAnd>
-        <Line options={options} data={dataLine} />;
+        <Line options={options} data={dataLine} />
         <TitleAnd level={2} className="mb-10 mt-16">
           Graph
         </TitleAnd>
