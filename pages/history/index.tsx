@@ -5,13 +5,10 @@ import { Layout } from "@components/common/Layout";
 import { useOrder } from "@libs/hooks/useOrder";
 import { useEffect, useState } from "react";
 import { TOrder } from "types/order.type";
-import { DarkGreenButton, WhiteButton } from "@components/ui/Button";
 import { Modal, Pagination } from "antd";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 export default function History() {
-  const router = useRouter();
   const { getOrder } = useOrder();
   const [listOrder, setListOrder] = useState<TOrder[]>([]);
   const [viewOrder, setViewOrder] = useState<TOrder>();

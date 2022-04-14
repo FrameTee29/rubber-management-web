@@ -19,7 +19,13 @@ export function useCustomer() {
     return transformResponse(response);
   };
 
-  const getCustomersSummary = (params: CustomerParam) => {
+  const getCustomersSummary = (params: {
+    phone: string;
+    start?: string;
+    end?: string;
+    year?: string;
+    day?: string;
+  }) => {
     const response = useQuery(
       "getCustomersSummary",
       async () => await CustomerService.getCustomersSummary(params)
@@ -62,5 +68,10 @@ export function useCustomer() {
     }
   );
 
-  return { getCustomers, registerCustomer, updateCustomer, getCustomersSummary };
+  return {
+    getCustomers,
+    registerCustomer,
+    updateCustomer,
+    getCustomersSummary,
+  };
 }

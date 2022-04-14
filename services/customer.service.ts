@@ -28,9 +28,13 @@ const getCustomers = (
   return httpClient().get("/customers", { params });
 };
 
-const getCustomersSummary = (
-  params: CustomerParam
-): Promise<TResponse<TPagination<TOrder[]>>> => {
+const getCustomersSummary = (params: {
+  phone: string;
+  start?: string;
+  end?: string;
+  year?: string;
+  day?: string;
+}) => {
   return httpClient().get("/customers/summary", { params });
 };
 
