@@ -10,6 +10,7 @@ import Link from "next/link";
 
 export default function History() {
   const { getOrder } = useOrder();
+
   const [listOrder, setListOrder] = useState<TOrder[]>([]);
   const [viewOrder, setViewOrder] = useState<TOrder>();
   const [meta, setMeta] = useState({
@@ -20,6 +21,13 @@ export default function History() {
   });
   const { data: listOrderData, refetch } = getOrder(meta);
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    day: "numeric",
+  } as any;
+  options.timeZone = "UTC";
 
   useEffect(() => {
     if (listOrderData) {
@@ -95,7 +103,12 @@ export default function History() {
                   className="mx-auto grid grid-cols-9 items-center rounded gap-4 border-2 w-full  border-dark-green-primary bg-cream-secondary my-2 font-medium py-1"
                 >
                   <div className="text-center">{item.orderNumber}</div>
-                  <div>{item.createdAt}</div>
+                  <div>
+                    {new Date(item.createdAt ?? "").toLocaleDateString(
+                      "en-US",
+                      options
+                    )}
+                  </div>
                   <div>{item.customer.fullName}</div>
                   <div>{item.weightTotal}</div>
                   <div>{item.priceTotal}</div>
