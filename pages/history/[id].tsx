@@ -3,29 +3,26 @@ import { useCustomer } from "@libs/hooks/useCustomer";
 import { Layout } from "@components/common/Layout";
 import Title from "antd/lib/typography/Title";
 import { useEffect, useState } from "react";
-import { ClockIcon, CollectionIcon, PresentationChartBarIcon, SaveAsIcon, UserGroupIcon } from "@heroicons/react/solid";
+import {
+  ClockIcon,
+  CollectionIcon,
+  PresentationChartBarIcon,
+  SaveAsIcon,
+  UserGroupIcon,
+} from "@heroicons/react/solid";
 import { DatePicker } from "antd";
-import moment from "moment";
 
 const dateFormat = "YYYY/MM/DD";
 const yearFormat = "YYYY";
-export default function CustomerHistory(props) {
+export default function CustomerHistory({ id }: any) {
   const { getCustomersSummary } = useCustomer();
-  const [perSevenDay, setPerSevenDay] = useState<string>("");
-  const [perMonth, setPerMonth] = useState<string>("");
-  const [perYear, setPerYear] = useState<string>("");
-  const [currentDay, setCurrentDay] = useState<string>("");
-  //   console.log(perSevenDay);
-  //   console.log(perMonth);
-  //   console.log(perYear);
-  //   console.log(currentDay);
 
   const [meta, setMeta] = useState({
-    phone: props.id,
-    start: undefined ,
-    end: undefined ,
-    year: undefined ,
-    day: undefined ,
+    phone: id,
+    start: undefined,
+    end: undefined,
+    year: undefined,
+    day: undefined,
   });
   const { data, refetch } = getCustomersSummary(meta);
   const [listOrder, setListOrder] = useState<{
@@ -34,26 +31,21 @@ export default function CustomerHistory(props) {
     perYear: number;
     currentDay: number;
   }>();
-  console.log(listOrder);
 
   useEffect(() => {
     if (data) {
       setListOrder(data);
       setMeta(meta);
     }
-  }, [data, props.id]);
+  }, [data, id]);
 
   useEffect(() => {
     refetch();
   }, [meta]);
 
-  //   function onChangePerSevenDay(_: any, dateString: string) {
-  // setPerSevenDay(dateString);
-  //     setMeta(...meta, )
-  //   }
   function onChangeStartPerMonth(_: any, dateString: string) {
-    // setPerMonth(dateString);
     setMeta({ ...meta, start: dateString });
+    console.log(dateString);
   }
   function onChangeEndPerMonth(_: any, dateString: string) {
     setMeta({ ...meta, end: dateString });
@@ -70,7 +62,9 @@ export default function CustomerHistory(props) {
   return (
     <>
       <Title level={2}>
-        <p className="text-dark-green-primary">Phone : {props.id}</p>
+        <p className="text-dark-green-primary">
+          History <span className="text-base">#customer {id}</span>
+        </p>
       </Title>
 
       <div className="grid grid-cols-1 gap-4">
@@ -87,7 +81,7 @@ export default function CustomerHistory(props) {
             </div>
           </div>
           <div>
-              <p>*Summary customer create order today.</p>
+            <p>*Summary customer create order today.</p>
           </div>
         </div>
         {/* ----- */}
