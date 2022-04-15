@@ -123,13 +123,13 @@ export default function Index() {
     labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"],
     datasets: [
       {
-        label: "Dataset 1",
+        label: "Employer",
         data: employerTotal,
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
       {
-        label: "Dataset 2",
+        label: "Employee",
         data: employeeTotal,
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",

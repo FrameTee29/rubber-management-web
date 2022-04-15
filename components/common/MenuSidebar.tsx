@@ -3,6 +3,7 @@ import {
   ChartPieIcon,
   ClipboardListIcon,
   InboxInIcon,
+  PrinterIcon,
   UsersIcon,
 } from "@heroicons/react/solid";
 
@@ -26,5 +27,10 @@ export const MenuSidebar: TMenuSidebar[] = [
     title: "History",
     icon: <ClipboardListIcon />,
     href: "/history",
+  },
+  {
+    title: "Bill",
+    icon: <PrinterIcon />,
+    href: "/bill",
   },
 ];

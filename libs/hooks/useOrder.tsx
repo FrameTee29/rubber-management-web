@@ -15,6 +15,14 @@ export function useOrder() {
     );
     return transformResponse(response);
   };
+
+  const getOrderByOrderNumber = (orderNumber: string) => {
+    const response = useQuery(
+      "getOrderByOrderNumber",
+      async () => await OrderService.getOrderByOrderNumber(orderNumber)
+    );
+    return transformResponse(response);
+  };
   // Mutation
   const { mutateAsync: createOrder } = useMutation(
     async (form: CreateOrderForm) => await OrderService.createOrder(form),
@@ -28,5 +36,5 @@ export function useOrder() {
     }
   );
 
-  return { getOrder, createOrder };
+  return { getOrder, createOrder, getOrderByOrderNumber };
 }

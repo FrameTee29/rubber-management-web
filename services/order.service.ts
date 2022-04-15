@@ -14,8 +14,12 @@ const getOrders = (
   return httpClient().get("/orders", { params });
 };
 
+const getOrderByOrderNumber = (orderNumber: string) => {
+  return httpClient().get(`/orders/ordernumber/${orderNumber}`);
+};
+
 const getOrderByCustomerPhone = () => {};
 
-const OrderService = { createOrder, getOrders, getOrderByCustomerPhone };
+const OrderService = { createOrder, getOrders, getOrderByCustomerPhone, getOrderByOrderNumber};
 
 export default OrderService;
